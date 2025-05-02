@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="noindex,nofollow">
+		<meta name="viewport" content="width=device-width,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+		<title>hvcC</title>
+		<link rel="icon" href="data:;base64,=">
+		<style>
+			
+			* {
+				margin:0;
+				padding:0;
+				text-rendering:optimizeSpeed;
+				letter-spacing:1.5px;
+				font-kerning:none;
+				outline:none;
+			}
+			
+			body {
+				-webkit-text-size-adjust:100%;
+				font-family:'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+				overflow-x:hidden;
+				color:#242424;
+				font-weight:normal;
+				font-size:14px;
+				line-height:26px;
+				font-feature-settings:"palt";
+				word-wrap: break-word;
+				word-break:break-word;
+				text-align:left;
+				-webkit-tap-highlight-color: transparent;
+				background:#FFF;
+			}
+			
+			::selection { background:rgba(128,128,128,0.25); }
+			::-moz-selection { background:rgba(128,128,128,0.25); }
+			pre::selection { background:rgba(255,255,255,0.25); }
+			pre::-moz-selection { background:rgba(255,255,255,0.25); }
+			img::selection, iframe::selection { background:rgba(0,0,0,0); }
+			img::-moz-selection, iframe::-moz-selection { background:rgba(0,0,0,0); }
+			
+			#container {
+				position:relative;
+				width:86vw;
+				min-height:100%;
+				max-width:1921px;
+				margin:0 auto 0 auto;
+				padding:2px 0 48px 0;
+			}
+			
+			h1, h2, h2, h2, p, img {
+				margin-top:17px;
+				margin-bottom:-7px;
+			}
+			
+			h1, h2, h2, h2 {
+				font-weight:600;
+			}
+			
+			h1 {
+				font-size:22px;
+				line-height:32px;
+				text-align:justify;
+				text-align-last:left;
+				word-wrap: break-word;
+				word-break:break-all;
+			}
+			
+			h2 {
+				font-size:18px;
+				line-height:28px;
+				position:relative;
+				width:111%;
+				transform-origin:top left;
+				transform:scale(0.9,1);
+			}
+			
+			h2 {
+				font-size:16px;
+				line-height:26px;
+				position:relative;
+				width:111%;
+				transform-origin:top left;
+				transform:scale(0.9,1);
+			}
+			
+			p {
+				font-weight:normal;
+				text-align:left;
+				word-wrap:break-word;
+				word-break:break-strict;
+			}
+			
+			img {
+				vertical-align:top;
+				width:100%;
+			}
+			
+			#container > h1:last-child,
+			#container > h2:last-child,
+			#container > h2:last-child,
+			#container > p:last-child {
+				margin-bottom:0px;
+			}
+			
+			pre {
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+				font-size:13px;
+				line-height:20px;
+				border-radius:2px;
+				padding:12px 16px;
+				margin-top:24px;
+				background-color:#1d1e39;
+				color:#FEFEFE;
+				tab-size:2;
+				white-space:pre;
+				white-space:pre-wrap;
+				white-space:-pre-wrap;
+				white-space:-o-pre-wrap;
+				white-space:-moz-pre-wrap;
+				white-space:-hp-pre-wrap;
+				word-wrap:break-word;
+				word-break:break-all;
+			}
+			
+			a {
+				color:#00F;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<script>
+			
+			// https://github.com/KoryNunn/crel/blob/master/crel.min.js
+			(e=>{const t="function",n="isNode",o=(e,t)=>typeof e===t,r=(e,t)=>{null!==t&&(Array.isArray(t)?t.map(t=>r(e,t)):(i[n](t)||(t=document.createTextNode(t)),e.appendChild(t)))};function i(e,a){let d,f,l=arguments,c=1;if(e=i.isElement(e)?e:document.createElement(e),o(a,"object")&&!i[n](a)&&!Array.isArray(a))for(d in c++,a)f=a[d],o(d=i.attrMap[d]||d,t)?d(e,f):o(f,t)?e[d]=f:e.setAttribute(d,f);for(;c<l.length;c++)r(e,l[c]);return e}i.attrMap={},i.isElement=(e=>e instanceof Element),i[n]=(e=>e instanceof Node),i.proxy=new Proxy(i,{get:(e,t)=>(!(t in i)&&(i[t]=i.bind(null,t)),i[t])}),e(i,t)})((e,t)=>{"object"==typeof exports?module.exports=e:typeof define===t&&define.amd?define(()=>e):this.crel=e});
+				
+			crel(document.body,crel("div",{"id":"container"},crel("div",
+				
+				crel("h1","hvcC"),
+				
+				crel("pre","#define HEVCPROFILE_MAIN 1\n#define HEVCPROFILE_MAIN10 2\n#define HEVCPROFILE_REXT 4\n"),
+				
+				crel("h2","8bit 4:2:0"),
+				crel("pre","setU8(HEVCPROFILE_MAIN);\nsetU32(0b00000110000000000000000000000000);\nsetU8(0b00001101);\nsetU8(0b00000000);\nsetU32(0);\nsetU8((unsigned char)(6.1*30));\nsetU16(0xF000);\nsetU8(0xFC);\nsetU8(0xFD);\nsetU8(0xF8);\nsetU8(0xF8);\nsetU16(0);\nsetU8(0xB);"),
+				
+				crel("h2","8bit 4:2:2"),
+				crel("pre","setU8(HEVCPROFILE_REXT);\nsetU32(0b00010000000000000000000000000000);\nsetU8(0b11111101);\nsetU8(0b00010000);\nsetU32(0);\nsetU8((unsigned char)(5.0*30));\nsetU16(0xF000);\nsetU8(0xFC);\nsetU8(0xFE);\nsetU8(0xF8);\nsetU8(0xF8);\nsetU16(0);\nsetU8(0xB);"),
+				
+				crel("h2","10bit 4:2:0"),
+				crel("pre","setU8(HEVCPROFILE_MAIN10);\nsetU32(0b00000100000000000000000000000000);\nsetU8(0b00001101);\nsetU8(0b00000000);\nsetU32(0);\nsetU8((unsigned char)(6.1*30));\nsetU16(0x0F00);\nsetU8(0xFC);\nsetU8(0xFD);\nsetU8(0xFA);\nsetU8(0xFA);\nsetU16(0);\nsetU8(0xB);"),
+				
+				crel("h2","10bit 4:2:2"),
+				crel("pre","setU8(HEVCPROFILE_REXT);\nsetU32(0b00010000000000000000000000000000);\nsetU8(0b10111101);\nsetU8(0b00010000);\nsetU32(0);\nsetU8((unsigned char)(5.0*30));\nsetU16(0x0F00);\nsetU8(0xFC);\nsetU8(0xFE);\nsetU8(0xFA);\nsetU8(0xFA);\nsetU16(0);\nsetU8(0xB);")
+				
+			)));
+				
+		</script>
+	</body>
+</html>
