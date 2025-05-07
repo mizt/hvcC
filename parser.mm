@@ -52,7 +52,6 @@ unsigned int read_bits(buffer_t *buf, int nbits) {
 }
 
 unsigned int read_uev(buffer_t *buf) { // read exp-golomb code
-	
 	std::string golomb = "";
 	int zero_leading_bits = -1;
 	for(int b=0; !b; zero_leading_bits++) {
@@ -71,7 +70,7 @@ unsigned int read_uev(buffer_t *buf) { // read exp-golomb code
 int main(int argc, char *argv[]) {
 	@autoreleasepool {
 		
-		NSData *data = [NSData dataWithContentsOfFile:@"/Users/mizt/Downloads/20250505T144313945+0900.mov"]; 
+		NSData *data = [NSData dataWithContentsOfFile:@"/Users/mizt/Downloads/20250425T113604962+0900.mov"]; 
 		if(data) {
 			
 			const int length = data.length;
@@ -87,6 +86,7 @@ int main(int argc, char *argv[]) {
 			}
 			
 			if(seek>=0) {
+				
 				unsigned char *hvcC = u8+seek+4;
 				hvcC++; // 1
 				
@@ -204,7 +204,16 @@ int main(int argc, char *argv[]) {
 					std::vector<unsigned char> bin;
 					long len = length-1;
 					while(len>=4) {
-						if((sps[len]==0||sps[len]==1||sps[len]==2)&&sps[len-3]==0&&sps[len-2]==0&&sps[len-1]==3) { // Trim EPB
+						
+						// Trim Emulation Prevention Byte (EPB)
+						
+						// 0x00000300 to 0x000000
+						// 0x00000301 to 0x000001
+						// 0x00000302 to 0x000002
+						// 0x00000303 to 0x000003 ?
+						
+						//if((sps[len]==0||sps[len]==1||sps[len]==2)&&(sps[len-3]==0x00&&sps[len-2]==0x00&&sps[len-1]==0x03)) {
+						if((sps[len]==0||sps[len]==1||sps[len]==2||sps[len]==3)&&(sps[len-3]==0x00&&sps[len-2]==0x00&&sps[len-1]==0x03)) {
 							bin.insert(bin.begin(),sps[len]);
 							len-=2;
 						}
@@ -212,6 +221,9 @@ int main(int argc, char *argv[]) {
 							bin.insert(bin.begin(),sps[len]);
 							len--;
 						}
+						
+						bin.insert(bin.begin(),sps[len]);
+						len--;
 					}
 					
 					unsigned char *bytes = (unsigned char *)bin.data();
@@ -297,15 +309,15 @@ int main(int argc, char *argv[]) {
 						read_uev(&buffer);
 					}
 					
+					NSLog(@"bit_depth_luma = %d",read_uev(&buffer)+8);
+					
 					if(DEBUG) {
-						NSLog(@"bit_depth_luma = %d",read_uev(&buffer)+8);
+						NSLog(@"bit_depth_chroma = %d",read_uev(&buffer)+8);
 					}
 					else {
 						read_uev(&buffer);
 					}
 					
-					NSLog(@"bit_depth_chroma = %d",read_uev(&buffer)+8);
-				
 					delete[] sps;
 				}
 			}
