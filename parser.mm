@@ -177,7 +177,7 @@ int main(int argc, char *argv[]) {
 				
 				// SPS
 				if(DEBUG) {
-					NSLog(@"%d",(*hvcC++)&(~(1<<7))); // 33
+					NSLog(@"%d",(*hvcC)&(~(1<<7))); // 33
 				}
 				hvcC++;
 				
