@@ -153,7 +153,9 @@ int main(int argc, char *argv[]) {
 				}
 				hvcC++;
 				
-				NSLog(@"setU16(0x%X);",*((unsigned short *)hvcC));
+				if(DEBUG) {
+					NSLog(@"setU16(0x%X);",*((unsigned short *)hvcC));
+				}
 				hvcC+=2;
 				
 				if(DEBUG) {
@@ -195,26 +197,24 @@ int main(int argc, char *argv[]) {
 				sps[1] = 0;
 				memcpy(sps+2,hvcC-2,size+2);
 				
-				NSData *data = [[NSData alloc] initWithBytes:sps length:(size+4)];
-				if(data) {
+				if(sps) {
 					
-					unsigned char *bytes = (unsigned char *)data.bytes;
-					unsigned long length = data.length;
+					unsigned long length = size+4;
 					
 					std::vector<unsigned char> bin;
 					long len = length-1;
 					while(len>=4) {
-						if((bytes[len]==0||bytes[len]==1||bytes[len]==2)&&bytes[len-3]==0&&bytes[len-2]==0&&bytes[len-1]==3) { // Trim EPB
-							bin.insert(bin.begin(),bytes[len]);
+						if((sps[len]==0||sps[len]==1||sps[len]==2)&&sps[len-3]==0&&sps[len-2]==0&&sps[len-1]==3) { // Trim EPB
+							bin.insert(bin.begin(),sps[len]);
 							len-=2;
 						}
 						else {
-							bin.insert(bin.begin(),bytes[len]);
+							bin.insert(bin.begin(),sps[len]);
 							len--;
 						}
 					}
 					
-					bytes = (unsigned char *)bin.data();
+					unsigned char *bytes = (unsigned char *)bin.data();
 					
 					if(DEBUG) {
 						NSLog(@"nal_unit_type = %u",(U16(bytes)>>9)&MASK_06);
@@ -268,7 +268,7 @@ int main(int argc, char *argv[]) {
 					bytes++;
 					
 					buffer_t buffer;
-					buffer.length = (data.length-22); 
+					buffer.length = (length-22); 
 					for(int n=0; n<buffer.length; n++) {
 						buffer.bytes[n] = *bytes++;
 					}
@@ -285,10 +285,8 @@ int main(int argc, char *argv[]) {
 						read_bit(&buffer);
 					}
 					
-					
 					NSLog(@"chroma_format_idc = %d",chroma_format_idc);
-					
-					
+										
 					NSLog(@"pic_width_in_luma_samples = %d",read_uev(&buffer));
 					NSLog(@"pic_height_in_luma_samples = %d",read_uev(&buffer));
 					
@@ -307,9 +305,9 @@ int main(int argc, char *argv[]) {
 					}
 					
 					NSLog(@"bit_depth_chroma = %d",read_uev(&buffer)+8);
-				}
 				
-				delete[] sps;
+					delete[] sps;
+				}
 			}
 		}
 	}
